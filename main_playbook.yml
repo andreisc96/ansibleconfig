@@ -1,0 +1,5 @@
+---
+ - name: Deploy petclinic app to AS
+   hosts: webpetclinic
+   become: yes
+   
