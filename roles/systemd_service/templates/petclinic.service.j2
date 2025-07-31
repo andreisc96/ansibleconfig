@@ -5,11 +5,11 @@ StartLimitIntervalSec=0
 
 [Service]
 WorkingDirectory=/opt/petclinic/
-Type=simple
-Restart=always
-RestartSec=1
-User=root
 ExecStart=/usr/bin/java -jar /opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar
+Restart=always
+RestartSec=2
+User=root
+
 
 [Install]
 WantedBy=multi-user.target
