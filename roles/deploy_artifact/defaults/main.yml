@@ -1,5 +1,5 @@
 ---
 jar_file: "spring-petclinic-3.5.0-SNAPSHOT.jar"
-src_control_node: "/home/osansible/myagent/_work/1/s/target"
+src_control_node: "/home/osansible/myagent/_work/1/s/drop"
 application_path: "/opt/petclinic"
 version: "3.5.0"
