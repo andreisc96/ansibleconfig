@@ -7,6 +7,6 @@
 
 - name: Application path
   file:
-    path: "{{ application_path }}"
+    path: "{{ application_path }}/{{ version }}"
     state: directory
     mode: '0755'
