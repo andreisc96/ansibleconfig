@@ -22,4 +22,4 @@
            mode: '0755'
 
       - name: Start the app
-        shell: "nohup java -jar opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar"
+        shell: "java -jar opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar"
