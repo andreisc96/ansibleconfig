@@ -8,8 +8,6 @@
 - name: Reload service
   systemd:
     daemon_reload: yes
-    name: petclinic
-    state: reloaded
 
 - name: Start the petclinic app
   systemd:
