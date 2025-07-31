@@ -1,0 +1,5 @@
+- name: Reload petclinic service
+  systemd:
+    daemon_reload: yes
+    name: petclinic
+    state: reloaded

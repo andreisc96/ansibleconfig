@@ -1,0 +1,15 @@
+[Unit]
+Description=Petclinic Application
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+WorkingDirectory=/opt/petclinic
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/java -jar /opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar
+
+[Install]
+WantedBy=multi-user.target

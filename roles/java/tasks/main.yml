@@ -1,0 +1,12 @@
+---
+- name: Install java
+  apt:
+    name: openjdk-17-jdk
+    state: present
+    update_cache: yes
+
+- name: Application directory
+  file:
+    path: "/opt/petclinic"
+    state: directory
+    mode: '0755'

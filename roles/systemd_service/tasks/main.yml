@@ -1,0 +1,13 @@
+---
+- name: Create systemd service
+  template:
+    src: petclinic.service.j2
+    dest: /etc/systemd/system/petclinic.service
+    mode: '0755'
+  notify: Reload service
+
+- name: Start the petclinic app
+  systemd:
+    name: petclinic
+    enabled: yes
+    state: started
