@@ -2,4 +2,24 @@
  - name: Deploy petclinic app to AS
    hosts: webpetclinic
    become: yes
-   
+   tasks:
+      - name: Install java
+        apt:
+          name: openjdk-17-jdk
+          state: present
+          update_cache: yes
+
+      - name: Application directory
+        file:
+           path: "opt/petclinic"
+           state: directory
+           mode: '0755'
+
+      - name: Deploy .jar artifact
+        copy:
+           src: "/home/osansible/myagent/_work/1/s/target/spring-petclinic-3.5.0-SNAPSHOT.jar"
+           dest: "opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar"
+           mode: '0755'
+
+      - name: Start the app
+        shell: "nohup java -jar opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar"
