@@ -8,6 +8,7 @@
 - name: Reload systemd
   systemd:
     daemon_reload: yes
+  check_mode: no
 
 - name: Verify systemd unit file exists
   stat:
