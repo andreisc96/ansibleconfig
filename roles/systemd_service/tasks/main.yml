@@ -8,30 +8,6 @@
 - name: Reload systemd
   systemd:
     daemon_reload: yes
-  check_mode: no
-
-- name: Verify systemd unit file exists
-  stat:
-    path: /etc/systemd/system/petclinic.service
-  register: petclinic_unit
-
-- name: Debug unit file status
-  debug:
-    var: petclinic_unit
-
-- name: Wait for systemd to recognize the petclinic service
-  shell: systemctl status petclinic
-  register: system_result
-  retries: 5
-  delay: 2
-  until: system_result.rc == 0
-  changed_when: false
-  failed_when: system_result.rc != 0
-  check_mode: no
-
-- name: Display service status
-  debug:
-    var: system_result
 
 - name: Start the petclinic app
   systemd:
