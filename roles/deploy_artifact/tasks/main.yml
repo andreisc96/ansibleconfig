@@ -1,5 +1,5 @@
 - name: Deploy .jar artifact
   copy:
-    src: "/home/osansible/myagent/_work/1/s/target/spring-petclinic-3.5.0-SNAPSHOT.jar"
-    dest: "/opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar"
+    src: "{{ src_control_node }}/{{ jar_file }}"
+    dest: "{{ application_path }}/{{ version }}/{{ jar_file }}"
     mode: '0755'

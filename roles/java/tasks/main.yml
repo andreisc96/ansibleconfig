@@ -5,8 +5,8 @@
     state: present
     update_cache: yes
 
-- name: Application directory
+- name: Application path
   file:
-    path: "/opt/petclinic"
+    path: "{{ application_path }}"
     state: directory
     mode: '0755'
