@@ -9,6 +9,15 @@
   systemd:
     daemon_reload: yes
 
+- name: Verify systemd unit file exists
+  stat:
+    path: /etc/systemd/system/petclinic.service
+  register: petclinic_unit
+
+- name: Debug unit file status
+  debug:
+    var: petclinic_unit
+
 - name: Wait for systemd to recognize the petclinic service
   shell: systemctl status petclinic
   register: system_result
