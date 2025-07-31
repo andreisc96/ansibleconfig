@@ -5,15 +5,20 @@
     dest: /etc/systemd/system/petclinic.service
     mode: '0644'
 
-- name: Reload service
+- name: Reload systemd
   systemd:
     daemon_reload: yes
 
-- name: Check the service
-  shell: "systemctl status petclinic"
+- name: Wait for systemd to recognize the petclinic service
+  shell: systemctl status petclinic
   register: system_result
+  retries: 5
+  delay: 2
+  until: system_result.rc == 0
+  changed_when: false
+  failed_when: system_result.rc != 0
 
-- name: Display result
+- name: Display service status
   debug:
     var: system_result
 
@@ -22,5 +27,4 @@
     name: petclinic
     enabled: yes
     state: started
-    ignore_errors: yes
 
