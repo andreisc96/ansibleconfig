@@ -4,8 +4,8 @@ After=network.target
 StartLimitIntervalSec=0
 
 [Service]
-WorkingDirectory=/opt/petclinic/
-ExecStart=/usr/bin/java -jar /opt/petclinic/spring-petclinic-3.5.0-SNAPSHOT.jar
+WorkingDirectory=/opt/petclinic/3.5.0/
+ExecStart=/usr/bin/java -jar /opt/petclinic/3.5.0/spring-petclinic-3.5.0-SNAPSHOT.jar
 Restart=always
 RestartSec=2
 User=root
