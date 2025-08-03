@@ -1,0 +1,27 @@
+---
+- name: Create node_exporter user
+  user:
+    name: "{{ exporter }}"
+    shell: "/usr/sbin/nologin"
+    system: yes
+    create_home: no
+
+- name: Get node_exporter package from Git
+  get_url:
+    url: "{{ archive_url }}"
+    dest: "/tmp/{{ exporter }}.tar.gz"
+    mode: '0644'
+
+- name: Extract node_exporter
+  unarchive:
+    src: "/tmp/{{ exporter }}.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+
+- name: Move node_exporter
+  copy:
+    src: "/tmp/{{ exporter }}-{{ version }}.linux-amd64/{{ exporter }}"
+    dest: "/usr/local/bin/{{ exporter }}"
+    mode: '0755'
+    owner: root
+    group: root

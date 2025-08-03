@@ -1,0 +1,6 @@
+---
+exporter: "node_exporter"
+git_url: "https://github.com/prometheus/node_exporter/releases/"
+version: "1.9.1"
+install_path: "/usr/local/bin"
+archive_url: "{{ git_url }}v{{ version }}/{{ exporter }}-{{ version }}.linux-amd64.tar.gz"

@@ -1,0 +1,5 @@
+---
+systemd_path: "/etc/systemd/system"
+webapp: "petclinic"
+exporter: "node_exporter"
+exporter_port: "9100"
