@@ -9,7 +9,7 @@
 - name: Get node_exporter package from Git
   get_url:
     url: "{{ archive_url }}"
-    dest: "/tmp/{{ exporter }}.tar.gz"
+    dest: "/tmp/"
     mode: '0644'
 
 - name: Extract node_exporter
