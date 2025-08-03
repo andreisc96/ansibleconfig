@@ -6,4 +6,5 @@
    roles:
      - java
      - deploy_artifact
+     - node_exporter
      - systemd_service
