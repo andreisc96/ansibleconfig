@@ -1,15 +1,12 @@
 ---
-- vars:
-  services:
-    - "{{ webapp }}"
-    - "{{ exporter }}"
-
 - name: Create systemd service
   template:
     src: "{{ item }}.service.j2"
     dest: "{{ systemd_path }}/{{ item }}.service"
     mode: '0644'
-  loop: "{{ services }}"
+  loop:
+    - "{{ webapp }}"
+    - "{{ exporter }}"
   when: "'webpetclinic' in group_names"
 
 - name: Reload systemd
@@ -21,7 +18,9 @@
     name: "{{ item }}"
     enabled: yes
     state: started
-  loop: "{{ services }}"
+  loop:
+    - "{{ webapp }}"
+    - "{{ exporter }}"
   when: "'webpetclinic' in group_names"
 
 
