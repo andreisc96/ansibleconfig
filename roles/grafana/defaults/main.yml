@@ -1,0 +1,3 @@
+---
+key: "https://packages.grafana.com/gpg.key"
+repository: "deb https://packages.grafana.com/oss/deb stable main"

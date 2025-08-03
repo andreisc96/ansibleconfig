@@ -1,0 +1,26 @@
+---
+- name: Update packages
+  apt:
+    update_cache: yes
+
+- name: Add Grafana key
+  apt_key:
+    url: "{{ key }}"
+    state: present
+
+- name: Add repo
+  apt_repository:
+    repo: "{{ repository }}"
+    state: present
+    filename: grafana
+
+- name: Install Grafana
+  apt:
+    name: Grafana
+    state: present
+
+- name: Enable Grafana service
+  systemd:
+    name: grafana-server
+    enabled: yes
+    state: started
