@@ -12,6 +12,7 @@
 - name: Reload systemd
   systemd:
     daemon_reload: yes
+  when: "'webpetclinic' in group_names"
 
 - name: Start the services
   systemd:
@@ -22,6 +23,29 @@
     - "{{ webapp }}"
     - "{{ exporter }}"
   when: "'webpetclinic' in group_names"
+
+- name: Create systemd service Prometheus & Grafana
+  template:
+    src: "{{ item }}.service.j2"
+    dest: "{{ systemd_path }}/{{ item }}.service"
+    mode: '0644'
+  loop:
+    - "{{ monitoring }}"
+  when: "'monitoring' in group_names"
+
+- name: Reload systemd
+  systemd:
+    daemon_reload: yes
+  when: "'monitoring' in group_names"
+
+- name: Start the services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop:
+    - "{{ monitoring }}"
+  when: "'monitoring' in group_names"
 
 
 

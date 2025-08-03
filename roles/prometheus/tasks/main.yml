@@ -1,0 +1,59 @@
+---
+- name: Update packages
+  apt:
+    update_cache: yes
+
+- name: Create prometheus user
+  user:
+    name: "{{ monitoring }}"
+    shell: "/usr/sbin/nologin"
+    system: yes
+    create_home: no
+
+- name: Prometheus directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ monitoring }}"
+    group: "{{ monitoring }}"
+  loop:
+    - "/etc/prometheus"
+    - "/var/lib/prometheus"
+
+- name: Get Prometheus package from Git
+  get_url:
+    url: "{{ archive_url }}"
+    dest: "/tmp/"
+    mode: '0644'
+
+- name: Extract Prometheus
+  unarchive:
+    src: "/tmp/{{ monitoring }}-{{ version }}.linux-amd64.tar.gz"
+    dest: "/tmp/"
+    remote_src: yes
+
+- name: Move Prometheus binaries
+  copy:
+    src: "/tmp/{{ monitoring }}-{{ version }}.linux-amd64/{{ item }}"
+    dest: "/usr/local/bin"
+    mode: '0755'
+    owner: "{{ monitoring }}"
+    group: "{{ monitoring }}"
+    remote_src: yes
+  loop:
+    - "{{ monitoring }}"
+    - "{{ tool }}"
+
+- name: Move Prometheus config and dependencies
+  copy:
+    src: "/tmp/{{ monitoring }}-{{ version }}.linux-amd64/{{ item }}"
+    dest: "/etc/{{ monitoring }}"
+    mode: '0755'
+    owner: "{{ monitoring }}"
+    group: "{{ monitoring }}"
+    remote_src: yes
+  loop:
+    - "{{ dependency }}"
+    - "{{ libraries }}"
+    - "{{ config }}"

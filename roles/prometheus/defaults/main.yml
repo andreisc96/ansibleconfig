@@ -1,0 +1,9 @@
+---
+monitoring: "prometheus"
+git_url: "https://github.com/prometheus/prometheus/releases/download/"
+version: "3.5.0"
+archive_url: "{{ git_url }}v{{ version }}/{{ monitoring }}-{{ version }}.linux-amd64.tar.gz"
+tool: "promtool"
+dependency: "consoles"
+libraries: "console_libraries"
+config: "prometheus.yml"
