@@ -16,7 +16,7 @@
 
 - name: Install Grafana
   apt:
-    name: Grafana
+    name: grafana
     state: present
 
 - name: Enable Grafana service
