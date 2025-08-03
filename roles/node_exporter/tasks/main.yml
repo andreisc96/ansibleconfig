@@ -14,7 +14,7 @@
 
 - name: Extract node_exporter
   unarchive:
-    src: "/tmp/{{ exporter }}.tar.gz"
+    src: "/tmp/{{ exporter }}-{{ version }}.linux-amd64.tar.gz"
     dest: "/tmp/"
     remote_src: yes
 
