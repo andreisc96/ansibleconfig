@@ -8,3 +8,11 @@
      - deploy_artifact
      - node_exporter
      - systemd_service
+
+ - name: Deploy Prometheus to monitoring VM
+   hosts: monitoring
+   become: yes
+   gather_facts: no
+   roles:
+     - prometheus
+     - systemd_service
