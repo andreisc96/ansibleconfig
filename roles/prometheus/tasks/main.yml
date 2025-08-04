@@ -45,15 +45,14 @@
     - "{{ monitoring }}"
     - "{{ tool }}"
 
-#- name: Move Prometheus config and dependencies
-#  copy:
-#    src: "/tmp/{{ monitoring }}-{{ version }}.linux-amd64/{{ item }}"
-#    dest: "/etc/{{ monitoring }}"
-#    mode: '0755'
-#    owner: "{{ monitoring }}"
-#    group: "{{ monitoring }}"
-#    remote_src: yes
-#  loop:
-#    - "{{ dependency }}"
-#    - "{{ libraries }}"
-#    - "{{ config }}"
+- name: Add scraping target to prometheus.yml
+  blockinfile:
+    path: "/etc/{{ monitoring }}/{{ monitoring }}.yml"
+    block: |
+      - job_name: "node_exporter_petclinic"
+      
+        static_configs:
+          - targets: ['10.0.0.5:9100']
+    insertafter: EOF
+    state: present
+    backup: yes
