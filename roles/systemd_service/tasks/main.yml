@@ -44,6 +44,7 @@
     insertafter: EOF
     state: present
     backup: yes
+  when: "'monitoring' in group_names"
 
 - name: Reload systemd
   systemd:
