@@ -24,7 +24,7 @@
     - "{{ exporter }}"
   when: "'webpetclinic' in group_names"
 
-- name: Create systemd service Prometheus & Grafana
+- name: Create systemd service Prometheus
   template:
     src: "{{ item }}.service.j2"
     dest: "{{ systemd_path }}/{{ item }}.service"
@@ -32,6 +32,18 @@
   loop:
     - "{{ monitoring }}"
   when: "'monitoring' in group_names"
+
+- name: Add scraping target to prometheus.yml
+  blockinfile:
+    path: "/etc/{{ monitoring }}/{{ monitoring }}.yml"
+    block: |
+      - job_name: "node_exporter_petclinic"
+      
+        static_configs:
+          - targets: ['10.0.0.5:9100']
+    insertafter: EOF
+    state: present
+    backup: yes
 
 - name: Reload systemd
   systemd:
